@@ -14,7 +14,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../Store';
-import { toast } from 'react-toastify';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -84,38 +84,7 @@ function ProductScreen() {
     navigate('/cart');
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (!comment || !rating) {
-      toast.error('Please enter comment and rating');
-      return;
-    }
-    try {
-      const { data } = await axios.post(
-        `https://backendproyecto-5-udd-production.up.railway.app/api/products/${product._id}/reviews`,
-        { rating, comment, name: userInfo.name },
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
 
-      dispatch({
-        type: 'CREATE_SUCCESS',
-      });
-      toast.success('Review submitted successfully');
-      product.reviews.unshift(data.review);
-      product.numReviews = data.numReviews;
-      product.rating = data.rating;
-      dispatch({ type: 'REFRESH_PRODUCT', payload: product });
-      window.scrollTo({
-        behavior: 'smooth',
-        top: reviewsRef.current.offsetTop,
-      });
-    } catch (error) {
-      toast.error(getError(error));
-      dispatch({ type: 'CREATE_FAIL' });
-    }
-  };
   return loading ? (
     <LoadingBox />
   ) : error ? (
