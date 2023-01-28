@@ -14,7 +14,7 @@ import SigninScreen from "./screens/SigninScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SignupScreen from "./screens/SignupScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
-
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProfileScreen from "./screens/ProfileScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
@@ -108,6 +108,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
 
               <Route
                 path="/shipping"
